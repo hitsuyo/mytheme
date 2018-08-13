@@ -1,14 +1,15 @@
 
 <div style="margin-top: 50px;">
 <footer id="footer" style="background-color: #e8f5e9; bottom: 0;">
-        <div class="container" style="height: 50px; border: 1px solid white;">
+        <div class="container" style="height: 50px;">
                 <div class="row" id="footer-menu" style="height: 100%; ">
-                        <div class="main-menu col s12 l11" id="main-menu-ID" style="z-index: 9; ">
+                        <div class="bottom-menu col s12" id="bottom-menu-ID" style="z-index: 9; ">
                                 <!-- wp_nav_menu( array( 'theme_location' => 'my-main-menu', 'container_class' => 'my-custom-main-menu-class' ) );  -->
-                                <?php echo do_shortcode( '[mtlevel_menu]' );?>
+                                <?php echo do_shortcode( '[mtlevel_menu_bottom]' );?>
                         </div>
                 </div>
         </div>
+        <div><hr></div>
         <div class="container">
                 <div class="row">
                         <div class="col s12">

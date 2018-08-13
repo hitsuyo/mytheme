@@ -17,7 +17,7 @@
             <div class="row" >
                 <p class="white-text center-align">Hãy liên hệ ngay cho chúng tôi để nhận được ưu đãi</p>
             </div>
-        </div>
+    </div>
     <div class="container" style="height: 100%;">
         <div class="row" id="header-menu" style="height: 100%; ">
             <div class="logo col s12 l1" >

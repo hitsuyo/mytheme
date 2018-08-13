@@ -25,15 +25,15 @@ function multilevel_menu( $atts)
             $menuID = $menuLocations['my-main-menu']; 
             $primaryNav = wp_get_nav_menu_items($menuID); 
             $id_parent =0;
-            foreach ( $primaryNav as $navItem ) {
+            foreach ( (array) $primaryNav as $navItem ) {
                 if($navItem -> menu_item_parent == $id_parent){
                     echo '<li class="menu-item'.$navItem ->ID.'"> <a href="'.$navItem->url.'" title="'.$navItem->title.'">'.$navItem->title.'</a>'; 
                     $sub="";
-                    foreach ( $primaryNav as $navItem2 ) { 
+                    foreach ( (array) $primaryNav as $navItem2 ) { 
                     if($navItem2 -> menu_item_parent == $navItem ->ID){
                     $sub .= '<li class="menu-item'.$navItem2 ->ID.'"> <a href="'.$navItem2->url.'" title="'.$navItem2->title.'">'.$navItem2->title.'</a>';
                     $sub2="";
-                    foreach ( $primaryNav as $navItem3 ) { 
+                    foreach ( (array) $primaryNav as $navItem3 ) { 
                         if($navItem3 -> menu_item_parent == $navItem2 ->ID){
                         $sub2 .= '<li class="menu-item' .$navItem3 ->ID.'"> <a href="'.$navItem3->url.'" title="'.$navItem3->title.'">'.$navItem3->title.'</a></li>';
                     } 
@@ -59,5 +59,47 @@ function multilevel_menu( $atts)
 add_shortcode( 'mtlevel_menu', 'multilevel_menu' );
 
 /*----------------------------------------------------*/
+function multilevel_menu_bottom( $atts)
+{
+    ob_start();
+?>
+        <div class="my-custom-main-menu-class_bottom" style="position: relative; z-index: 9;">
+            <ul id="menu-1" class="nav_main_bottom" style=" -webkit-transition: opacity 3s;">
+<?php 
+            $menuLocations = get_nav_menu_locations(); 
+            $menuID = $menuLocations['footer-nav-1']; 
+            $primaryNav = wp_get_nav_menu_items($menuID); 
+            $id_parent =0;
+            foreach ( (array) $primaryNav as $navItem ) {
+                if($navItem -> menu_item_parent == $id_parent){
+                    echo '<li class="menu-item'.$navItem ->ID.'"> <a href="'.$navItem->url.'" title="'.$navItem->title.'">'.$navItem->title.'</a>'; 
+                    $sub="";
+                    foreach ( (array) $primaryNav as $navItem2 ) { 
+                    if($navItem2 -> menu_item_parent == $navItem ->ID){
+                    $sub .= '<li class="menu-item'.$navItem2 ->ID.'"> <a href="'.$navItem2->url.'" title="'.$navItem2->title.'">'.$navItem2->title.'</a>';
+                    $sub2="";
+                    foreach ( (array) $primaryNav as $navItem3 ) { 
+                        if($navItem3 -> menu_item_parent == $navItem2 ->ID){
+                        $sub2 .= '<li class="menu-item' .$navItem3 ->ID.'"> <a href="'.$navItem3->url.'" title="'.$navItem3->title.'">'.$navItem3->title.'</a></li>';
+                    } 
+                    }
+                    $sub .= '<ul>'.$sub2.'</ul>'; 
+                    $sub .= '</li>';
+                    } 
+                }
+                echo '<ul>'.$sub.'</ul>';
+                echo '</li>';
+                }
+    }
+?>
+            </ul>
+        </div>
 
+        <style>
+            .show {display:block;  visibility: visible; transition-delay: 0.1s, 0.1s, 0.3s;}
+        </style>
+<?php 
+	return ob_get_clean();
+}
+add_shortcode( 'mtlevel_menu_bottom', 'multilevel_menu_bottom' );
 
